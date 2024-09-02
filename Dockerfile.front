@@ -1,0 +1,21 @@
+FROM node:latest
+
+LABEL authors="santiago"
+
+# Установите рабочую директорию
+WORKDIR /opt/user
+
+# Скопируйте package.json и package-lock.json (если он есть)
+COPY killmepls/package*.json ./
+
+# Установите зависимости
+RUN npm install axios@1.7.5 next@14.2.6 react-dom@18.3.1 react-icons@5.3.0 react@18.3.1 sass@1.77.8
+
+# Скопируйте остальные файлы проекта
+COPY killmepls . 
+
+# Откройте порт 3000
+EXPOSE 3000
+
+# Запустите приложение
+CMD ["npm", "run", "dev"]
